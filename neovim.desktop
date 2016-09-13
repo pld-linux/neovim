@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Neovim
+Categories=ConsoleOnly;Application;Utility;TextEditor;
+GenericName=Text Editor
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Exec=xdg-terminal "nvim %f"
+Icon=neovim
+Type=Application
+Terminal=false
