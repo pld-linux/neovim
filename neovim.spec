@@ -103,6 +103,23 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %update_desktop_database
 %update_icon_cache hicolor
+%banner -e -o %{name} << 'EOF'
+
+The Neovim executable is called 'nvim'. To use your existing Vim
+configuration:
+    ln -s ~/.vim ~/.config/nvim
+    ln -s ~/.vimrc ~/.config/nvim/init.vim
+See ':help nvim' for more information on Neovim.
+
+If you want support for Python plugins such as YouCompleteMe, you need
+to install a Python module in addition to Neovim itself.
+
+See ':help provider-python' or this page for more information:
+    http://neovim.io/doc/user/provider.html
+
+If you have any questions, have a look at:
+    https://github.com/neovim/neovim/wiki/FAQ.
+EOF
 
 %postun
 %update_desktop_database
