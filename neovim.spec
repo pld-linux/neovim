@@ -41,6 +41,11 @@ Suggests:	python3-neovim
 Suggests:	xsel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# gcc 4.0 and better turn on _FORTIFY_SOURCE=2 automatically. This currently
+# does not work with Neovim due to some uses of dynamically-sized structures.
+# See https://github.com/neovim/neovim/issues/223 for details.
+%define		filterout_c	-Wp,-D_FORTIFY_SOURCE=2
+
 %description
 Neovim is a refactor - and sometimes redactor - in the tradition of
 Vim, which itself derives from Stevie. It is not a rewrite, but a
