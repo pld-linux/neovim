@@ -2,12 +2,12 @@
 # - -rt subpackage? -lang subpackage?
 #
 # Conditional build:
-%bcond_with	lua		# LUA
+%bcond_without	lua		# LUA
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.1.5
-Release:	0.4
+Release:	0.5
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -28,9 +28,9 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	unibilium-devel
 %if %{with lua}
+BuildRequires:	lua-bitop
 BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
-BuildRequires:	lua51-BitOp
 BuildRequires:	luajit-devel
 %endif
 Requires:	desktop-file-utils
@@ -70,9 +70,9 @@ cd .deps
 	-DUSE_BUNDLED_LIBVTERM=OFF \
 	-DUSE_BUNDLED_LIBUV=OFF \
 	-DUSE_BUNDLED_MSGPACK=OFF \
-	-DUSE_BUNDLED_LUAJIT=ON \
-	-DUSE_BUNDLED_LUAROCKS=ON \
-	-DUSE_BUNDLED_LUV=ON \
+	-DUSE_BUNDLED_LUAJIT=OFF \
+	-DUSE_BUNDLED_LUAROCKS=OFF \
+	-DUSE_BUNDLED_LUV=OFF \
 	../third-party
 %{__make}
 
