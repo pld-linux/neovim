@@ -7,7 +7,7 @@
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.1.5
-Release:	0.2
+Release:	0.4
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -22,15 +22,15 @@ BuildRequires:	jemalloc-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtermkey-devel
 BuildRequires:	libuv-devel
-BuildRequires:	msgpack-devel >= 1.2.0
+BuildRequires:	libvterm-devel
+BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
-#BuildRequires:	pkgconfig(vterm)
 BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	unibilium-devel
 %if %{with lua}
+BuildRequires:	lua-lpeg
+BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	lua51-BitOp
-BuildRequires:	lua51-LPeg
-BuildRequires:	lua51-mpack
 BuildRequires:	luajit-devel
 %endif
 Requires:	desktop-file-utils
@@ -40,8 +40,6 @@ Suggests:	python-neovim
 Suggests:	python3-neovim
 Suggests:	xsel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_prefix	/usr/local
 
 %description
 Neovim is a refactor - and sometimes redactor - in the tradition of
@@ -65,30 +63,40 @@ sed -i "s/__DATE__/\"$BUILD_DATE\"/" $(grep -rl '__DATE__')
 %endif
 
 %build
-%if 0
+install -d .deps build
+cd .deps
 %cmake \
-	-DLUA_PRG=%{_bindir}/lua \
-	-DUSE_BUNDLED=OFF		\
-	-DLUAJIT_USE_BUNDLED=OFF \
-	-DENABLE_JEMALLOC=ON \
-\
-	-DUSE_BUNDLED_JEMALLOC=ON \
-	-DUSE_BUNDLED_UNIBILIUM=ON \
-	-DUSE_BUNDLED_LIBTERMKEY=ON \
-	-DUSE_BUNDLED_LIBVTERM=ON \
-	-DUSE_BUNDLED_LIBUV=ON \
-	-DUSE_BUNDLED_MSGPACK=ON \
+	-DUSE_BUNDLED=OFF \
+	-DUSE_BUNDLED_JEMALLOC=OFF \
+	-DUSE_BUNDLED_UNIBILIUM=OFF \
+	-DUSE_BUNDLED_LIBTERMKEY=OFF \
+	-DUSE_BUNDLED_LIBVTERM=OFF \
+	-DUSE_BUNDLED_LIBUV=OFF \
+	-DUSE_BUNDLED_MSGPACK=OFF \
 	-DUSE_BUNDLED_LUAJIT=ON \
 	-DUSE_BUNDLED_LUAROCKS=ON \
 	-DUSE_BUNDLED_LUV=ON \
+	../third-party
+%{__make}
 
-%endif
+cd ../build
+%cmake \
+	-DLUA_PRG=/usr/bin/luajit \
+	-DENABLE_JEMALLOC=ON \
+	-DLUAJIT_USE_BUNDLED=OFF \
+	-DLIBUV_USE_BUNDLED=OFF \
+	-DMSGPACK_USE_BUNDLED=OFF \
+	-DUNIBILIUM_USE_BUNDLED=OFF \
+	-DLIBTERMKEY_USE_BUNDLED=OFF \
+	-DLIBVTERM_USE_BUNDLED=OFF \
+	-DJEMALLOC_USE_BUNDLED=OFF \
+	..
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_iconsdir}/hicolor/scalable/apps}
