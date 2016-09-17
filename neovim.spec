@@ -59,14 +59,6 @@ parts of Vim, without compromise, and more.
 %prep
 %setup -q
 
-%if 0
-# Remove __DATE__ and __TIME__.
-BUILD_TIME=$(LC_ALL=C date -ur %{_sourcedir}/%{name}.changes +'%{H}:%{M}')
-BUILD_DATE=$(LC_ALL=C date -ur %{_sourcedir}/%{name}.changes +'%{b} %{d} %{Y}')
-sed -i "s/__TIME__/\"$BUILD_TIME\"/" $(grep -rl '__TIME__')
-sed -i "s/__DATE__/\"$BUILD_DATE\"/" $(grep -rl '__DATE__')
-%endif
-
 %build
 install -d .deps build
 cd .deps
