@@ -108,6 +108,20 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_iconsdir}/hicolor/scalable/apps}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/neovim.desktop
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/neovim.svg
 
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cs.cp1250
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ja.euc-jp
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ja.sjis
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ko.UTF-8
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/no
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pl.UTF-8
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pl.cp1250
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ru.cp1251
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/sk.cp1250
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/uk.cp1251
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/zh_CN.UTF-8
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/zh_CN.cp936
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/zh_TW.UTF-8
+
 %find_lang nvim
 
 %clean
