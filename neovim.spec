@@ -7,17 +7,17 @@
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.1.5
-Release:	0.5
+Release:	0.6
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	27598e4ee52b6c02af2b5353fe99b6e4
 URL:		https://neovim.io/
 Source1:	%{name}.desktop
 Source2:	%{name}.svg
 BuildRequires:	cmake >= 2.8.7
-BuildRequires:	fdupes
 BuildRequires:	gcc >= 6:4.4
-BuildRequires:	hicolor-icon-theme
+BuildRequires:	gettext-devel
 BuildRequires:	jemalloc-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtermkey-devel
@@ -28,10 +28,9 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	unibilium-devel
 %if %{with lua}
-BuildRequires:	lua-bitop
 BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
-BuildRequires:	luajit-devel
+BuildRequires:	luajit
 %endif
 Requires:	desktop-file-utils
 Requires:	gtk-update-icon-cache
