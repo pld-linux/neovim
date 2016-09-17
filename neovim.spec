@@ -77,7 +77,7 @@ cd .deps
 
 cd ../build
 %cmake \
-	-DLUA_PRG=/usr/bin/luajit \
+	-DLUA_PRG=/usr/bin/lua5.1 \
 	-DENABLE_JEMALLOC=ON \
 	-DLUAJIT_USE_BUNDLED=OFF \
 	-DLIBUV_USE_BUNDLED=OFF \
