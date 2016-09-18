@@ -38,6 +38,7 @@ Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Suggests:	python-neovim
 Suggests:	python3-neovim
+Suggests:	ruby-neovim
 Suggests:	xsel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
