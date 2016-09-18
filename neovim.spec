@@ -96,7 +96,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_iconsdir}/hicolor/scalable/apps}
+install -d $RPM_BUILD_ROOT{/etc/xdg/nvim,%{_desktopdir},%{_iconsdir}/hicolor/scalable/apps}
+touch $RPM_BUILD_ROOT/etc/xdg/nvim/init.vim
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/neovim.desktop
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/neovim.svg
 
@@ -147,6 +148,8 @@ EOF
 %files -f nvim.lang
 %defattr(644,root,root,755)
 %doc BACKERS.md CONTRIBUTING.md LICENSE README.md
+%dir /etc/xdg/nvim
+%config(noreplace) %verify(not md5 mtime size) /etc/xdg/nvim/init.vim
 %attr(755,root,root) %{_bindir}/nvim
 %{_datadir}/nvim
 %{_desktopdir}/%{name}.desktop
