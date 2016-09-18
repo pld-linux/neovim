@@ -28,9 +28,10 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	unibilium-devel
 %if %{with lua}
+BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
-BuildRequires:	luajit
+BuildRequires:	lua51
 %endif
 Requires:	desktop-file-utils
 Requires:	gtk-update-icon-cache
@@ -77,7 +78,7 @@ cd .deps
 
 cd ../build
 %cmake \
-	-DLUA_PRG=/usr/bin/luajit \
+	-DLUA_PRG=/usr/bin/lua5.1 \
 	-DENABLE_JEMALLOC=ON \
 	-DLUAJIT_USE_BUNDLED=OFF \
 	-DLIBUV_USE_BUNDLED=OFF \
