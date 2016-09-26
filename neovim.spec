@@ -1,5 +1,6 @@
 # TODO
 # - -rt subpackage? -lang subpackage?
+# - <meta>-xxx keybindings do not work (alt+something)
 #
 # Conditional build:
 %bcond_without	lua		# LUA
