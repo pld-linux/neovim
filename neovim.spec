@@ -7,12 +7,12 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.1.6
+Version:	0.1.7
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	307978937c7fc2ebd796b345d99ed7cd
+# Source0-md5:	f3acb6181f6888b620d11d1822fad982
 URL:		https://neovim.io/
 Source1:	%{name}.desktop
 Source2:	%{name}.svg
@@ -105,16 +105,11 @@ cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/neovim.svg
 
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cs.cp1250
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ja.euc-jp
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ja.sjis
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ko.UTF-8
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/no
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pl.UTF-8
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/pl.cp1250
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ru.cp1251
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/sk.cp1250
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/uk.cp1251
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/zh_CN.UTF-8
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/zh_CN.cp936
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/zh_TW.UTF-8
 
 %find_lang nvim
