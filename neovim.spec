@@ -7,12 +7,12 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.1.5
-Release:	2
+Version:	0.1.6
+Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	27598e4ee52b6c02af2b5353fe99b6e4
+# Source0-md5:	307978937c7fc2ebd796b345d99ed7cd
 URL:		https://neovim.io/
 Source1:	%{name}.desktop
 Source2:	%{name}.svg
