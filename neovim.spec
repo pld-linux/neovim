@@ -1,6 +1,7 @@
 # TODO
 # - -rt subpackage? -lang subpackage?
-# - <meta>-xxx keybindings do not work (alt+something)
+# - <meta>-xxx keybindings (alt+something) incompatibility
+#   https://github.com/neovim/neovim/issues/5576
 #
 # Conditional build:
 %bcond_without	lua		# LUA
