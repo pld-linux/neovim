@@ -8,15 +8,16 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.2.2
+Version:	0.3.1
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
+# Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	44b69f8ace88b646ec890670f1e462c4
+# Source0-md5:	5405bced1c929ebc245c75409cd6c7ef
 URL:		https://neovim.io/
-Source1:	%{name}.desktop
 Source2:	%{name}.svg
+Patch0:		desktop.patch
 BuildRequires:	cmake >= 2.8.7
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-devel
@@ -99,10 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{/etc/xdg/nvim,%{_desktopdir},%{_iconsdir}/hicolor/scalable/apps}
+install -d $RPM_BUILD_ROOT{/etc/xdg/nvim,%{_iconsdir}/hicolor/scalable/apps}
 touch $RPM_BUILD_ROOT/etc/xdg/nvim/init.vim
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/neovim.desktop
-cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/neovim.svg
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/nvim.svg
 
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cs.cp1250
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ja.euc-jp
@@ -149,7 +149,8 @@ EOF
 %dir /etc/xdg/nvim
 %config(noreplace) %verify(not md5 mtime size) /etc/xdg/nvim/init.vim
 %attr(755,root,root) %{_bindir}/nvim
-%{_datadir}/nvim
-%{_desktopdir}/%{name}.desktop
-%{_iconsdir}/hicolor/*/apps/%{name}.svg
 %{_mandir}/man1/nvim.1*
+%{_datadir}/nvim
+%{_desktopdir}/nvim.desktop
+%{_pixmapsdir}/nvim.png
+%{_iconsdir}/hicolor/*/apps/nvim.svg

@@ -1,0 +1,10 @@
+--- neovim-0.3.1/runtime/nvim.desktop~	2018-07-18 14:44:59.000000000 +0300
++++ neovim-0.3.1/runtime/nvim.desktop	2018-12-23 13:37:35.952940536 +0200
+@@ -76,6 +76,6 @@
+ Type=Application
+ Keywords=Text;editor;
+ Icon=nvim
+-Categories=Utility;TextEditor;
++Categories=ConsoleOnly;Application;Utility;TextEditor;
+ StartupNotify=false
+ MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
