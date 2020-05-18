@@ -4,7 +4,7 @@
 #   https://github.com/neovim/neovim/issues/5576
 #
 # Conditional build:
-%bcond_without	lua		# LUA
+%bcond_with	lua		# LUA
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
