@@ -4,7 +4,7 @@
 #   https://github.com/neovim/neovim/issues/5576
 #
 # Conditional build:
-%bcond_with	lua		# Prefer Lua over LuaJit
+%bcond_without	lua		# Prefer Lua over LuaJit
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
@@ -37,6 +37,7 @@ BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	unibilium-devel
 %if %{with lua}
 BuildRequires:	lua51
+BuildRequires:	lua51-devel
 %else
 BuildRequires:	luajit-devel
 %endif
