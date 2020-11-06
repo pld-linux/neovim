@@ -29,7 +29,7 @@ BuildRequires:	jemalloc-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtermkey-devel
 BuildRequires:	libuv-devel
-BuildRequires:	libvterm-devel < 0.1.3
+BuildRequires:	libvterm-devel >= 0.1.0
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
