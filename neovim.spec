@@ -36,7 +36,7 @@ BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
-BuildRequires:	unibilium-devel
+BuildRequires:	unibilium-devel >= 2.0.0
 %if %{with prefer_lua}
 BuildRequires:	lua51
 BuildRequires:	lua51-devel
