@@ -18,6 +18,8 @@ Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
+Patch1:		https://github.com/neovim/neovim/pull/12142.patch
+# Patch1-md5:	40bf36c33b4c49270243b39b916e164c
 BuildRequires:	cmake >= 2.8.7
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-devel
@@ -63,6 +65,7 @@ parts of Vim, without compromise, and more.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 install -d .deps build
