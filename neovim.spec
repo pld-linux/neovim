@@ -4,7 +4,7 @@
 #   https://github.com/neovim/neovim/issues/5576
 #
 # Conditional build:
-%bcond_with	lua		# LUA
+%bcond_with	lua		# Prefer Lua over LuaJit
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
@@ -28,15 +28,17 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtermkey-devel
 BuildRequires:	libuv-devel
 BuildRequires:	libvterm-devel
+BuildRequires:	lua-bitop >= 1.0.2
+BuildRequires:	lua-lpeg
+BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	unibilium-devel
 %if %{with lua}
-BuildRequires:	lua-bitop >= 1.0.2
-BuildRequires:	lua-lpeg
-BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	lua51
+%else
+BuildRequires:	luajit-devel
 %endif
 Requires:	desktop-file-utils
 Requires:	gtk-update-icon-cache
