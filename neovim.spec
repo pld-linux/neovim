@@ -4,7 +4,11 @@
 #   https://github.com/neovim/neovim/issues/5576
 #
 # Conditional build:
-%bcond_without	lua		# Prefer Lua over LuaJit
+%bcond_with	prefer_lua		# Prefer Lua over LuaJit
+
+%ifarch x32
+%define	with_prefer_lua 1
+%endif
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
@@ -35,7 +39,7 @@ BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
 BuildRequires:	unibilium-devel
-%if %{with lua}
+%if %{with prefer_lua}
 BuildRequires:	lua51
 BuildRequires:	lua51-devel
 %else
@@ -89,6 +93,7 @@ cd .deps
 
 cd ../build
 %cmake \
+	-DPREFER_LUA=%{!?with_prefer_lua:OFF}%{?with_prefer_lua:ON} \
 	-DLUA_PRG=/usr/bin/lua5.1 \
 	-DENABLE_JEMALLOC=ON \
 	-DLUAJIT_USE_BUNDLED=OFF \
