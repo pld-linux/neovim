@@ -62,6 +62,7 @@ parts of Vim, without compromise, and more.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 install -d .deps build
