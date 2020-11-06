@@ -29,7 +29,7 @@ BuildRequires:	libvterm-devel
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
-BuildRequires:	unibilium-devel
+BuildRequires:	unibilium-devel >= 2.0.0
 %if %{with lua}
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
