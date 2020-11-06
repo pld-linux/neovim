@@ -25,7 +25,7 @@ BuildRequires:	jemalloc-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtermkey-devel
 BuildRequires:	libuv-devel
-BuildRequires:	libvterm-devel
+BuildRequires:	libvterm-devel >= 0.1.0
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.596
