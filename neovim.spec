@@ -1,7 +1,5 @@
 # TODO
 # - -rt subpackage? -lang subpackage?
-# - <meta>-xxx keybindings (alt+something) incompatibility
-#   https://github.com/neovim/neovim/issues/5576
 #
 # Conditional build:
 %bcond_with	prefer_lua		# Prefer Lua over LuaJit
