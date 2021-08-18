@@ -20,13 +20,14 @@ Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
-BuildRequires:	cmake >= 2.8.7
+BuildRequires:	cmake >= 2.8.12
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-devel
+BuildRequires:	gperf
 BuildRequires:	jemalloc-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtermkey-devel
-BuildRequires:	libuv-devel
+BuildRequires:	libtermkey-devel >= 0.18
+BuildRequires:	libuv-devel >= 1.28.0
 BuildRequires:	libvterm-devel >= 0.1.0
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
@@ -44,6 +45,8 @@ BuildRequires:	luajit-devel
 Requires:	desktop-file-utils
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
+Requires:	libtermkey >= 0.18
+Requires:	libuv >= 1.28.0
 Suggests:	python-neovim
 Suggests:	python3-neovim
 Suggests:	ruby-neovim
