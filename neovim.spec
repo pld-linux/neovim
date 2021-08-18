@@ -4,8 +4,8 @@
 # Conditional build:
 %bcond_with	prefer_lua		# Prefer Lua over LuaJit
 
-%ifarch x32
-%define	with_prefer_lua 1
+%ifnarch %{ix86} %{x8664} %{arm} mips ppc
+%define		with_prefer_lua	1
 %endif
 
 Summary:	Vim-fork focused on extensibility and agility
