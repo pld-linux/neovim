@@ -4,23 +4,31 @@
 # Conditional build:
 %bcond_with	prefer_lua		# Prefer Lua over LuaJit
 
-%ifnarch %{ix86} %{x8664} %{arm} mips ppc
+%ifnarch %{ix86} %{x8664} %{arm} aarch64 mips mips64 mipsel ppc
 %define		with_prefer_lua	1
+%endif
+
+%if %{with prefer_lua}
+%define		luv_includedir	/usr/include/lua5.1
+%define		luv_library	/usr/%{_lib}/lua/5.1/luv.so
+%else
+%define		luv_includedir	/usr/include/luajit-2.1
+%define		luv_library	/usr/%{_lib}/luajit/2.1/luv.so
 %endif
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.4.4
+Version:	0.7.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	526e6a9194d6d65fd5e7faa4b506e7c8
+# Source0-md5:	96d634871c9a0791fb5643eb764869e5
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
-BuildRequires:	cmake >= 2.8.12
+BuildRequires:	cmake >= 3.10
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-devel
 BuildRequires:	gperf
@@ -31,16 +39,20 @@ BuildRequires:	libuv-devel >= 1.28.0
 BuildRequires:	libvterm-devel >= 0.1.0
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
+BuildRequires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
 BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	tree-sitter-devel
 BuildRequires:	unibilium-devel >= 2.0.0
 %if %{with prefer_lua}
 BuildRequires:	lua51
 BuildRequires:	lua51-devel
+BuildRequires:	lua51-luv-devel >= 1.43.0
 %else
 BuildRequires:	luajit-devel
+BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
 Requires:	desktop-file-utils
 Requires:	gtk-update-icon-cache
@@ -73,37 +85,15 @@ parts of Vim, without compromise, and more.
 %patch0 -p1
 
 %build
-install -d .deps build
-cd .deps
-%cmake \
-	-DUSE_BUNDLED=OFF \
-	-DUSE_BUNDLED_JEMALLOC=OFF \
-	-DUSE_BUNDLED_UNIBILIUM=OFF \
-	-DUSE_BUNDLED_LIBTERMKEY=OFF \
-	-DUSE_BUNDLED_LIBVTERM=OFF \
-	-DUSE_BUNDLED_LIBUV=OFF \
-	-DUSE_BUNDLED_MSGPACK=OFF \
-	-DUSE_BUNDLED_LUAJIT=OFF \
-	-DUSE_BUNDLED_LUAROCKS=OFF \
-	-DUSE_BUNDLED_LUV=ON \
-	../third-party
-%{__make}
-
-cd ../build
-%cmake \
+%cmake -B build \
 	-DPREFER_LUA=%{!?with_prefer_lua:OFF}%{?with_prefer_lua:ON} \
-	-DLUA_PRG=/usr/bin/lua5.1 \
+	-DLUA_PRG=%{!?with_prefer_lua:/usr/bin/luajit}%{?with_prefer_lua:/usr/bin/lua5.1} \
+	-DUSE_BUNDLED=OFF \
 	-DENABLE_JEMALLOC=ON \
-	-DLUAJIT_USE_BUNDLED=OFF \
-	-DLIBUV_USE_BUNDLED=OFF \
-	-DMSGPACK_USE_BUNDLED=OFF \
-	-DUNIBILIUM_USE_BUNDLED=OFF \
-	-DLIBTERMKEY_USE_BUNDLED=OFF \
-	-DLIBVTERM_USE_BUNDLED=OFF \
-	-DJEMALLOC_USE_BUNDLED=OFF \
-	..
+	-DLIBLUV_INCLUDE_DIR=%{luv_includedir} \
+	-DLIBLUV_LIBRARY=%{luv_library}
 
-%{__make}
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -155,12 +145,12 @@ EOF
 
 %files -f nvim.lang
 %defattr(644,root,root,755)
-%doc BACKERS.md CONTRIBUTING.md LICENSE README.md
+%doc BACKERS.md CONTRIBUTING.md LICENSE.txt README.md
 %dir /etc/xdg/nvim
 %config(noreplace) %verify(not md5 mtime size) /etc/xdg/nvim/init.vim
 %attr(755,root,root) %{_bindir}/nvim
 %{_mandir}/man1/nvim.1*
 %{_datadir}/nvim
 %{_desktopdir}/nvim.desktop
-%{_pixmapsdir}/nvim.png
+%{_iconsdir}/hicolor/*/apps/nvim.png
 %{_iconsdir}/hicolor/*/apps/nvim.svg

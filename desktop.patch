@@ -1,8 +1,8 @@
 --- neovim-0.3.1/runtime/nvim.desktop~	2018-07-18 14:44:59.000000000 +0300
 +++ neovim-0.3.1/runtime/nvim.desktop	2018-12-23 13:37:35.952940536 +0200
 @@ -76,6 +76,6 @@
- Type=Application
- Keywords=Text;editor;
+ Keywords[sr]=Текст;едитор;
+ Keywords[tr]=Metin;düzenleyici;
  Icon=nvim
 -Categories=Utility;TextEditor;
 +Categories=ConsoleOnly;Application;Utility;TextEditor;
