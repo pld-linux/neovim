@@ -39,7 +39,6 @@ BuildRequires:	libuv-devel >= 1.28.0
 BuildRequires:	libvterm-devel >= 0.1.0
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
-BuildRequires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
 BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
@@ -59,6 +58,7 @@ Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	libtermkey >= 0.18
 Requires:	libuv >= 1.28.0
+Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
 Suggests:	python-neovim
 Suggests:	python3-neovim
 Suggests:	ruby-neovim
