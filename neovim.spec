@@ -88,6 +88,7 @@ parts of Vim, without compromise, and more.
 %cmake -B build \
 	-DPREFER_LUA=%{!?with_prefer_lua:OFF}%{?with_prefer_lua:ON} \
 	-DLUA_PRG=%{!?with_prefer_lua:/usr/bin/luajit}%{?with_prefer_lua:/usr/bin/lua5.1} \
+	-DLUA_INCLUDE_DIR=/usr/include/lua5.1 \
 	-DUSE_BUNDLED=OFF \
 	-DENABLE_JEMALLOC=ON \
 	-DLIBLUV_INCLUDE_DIR=%{luv_includedir} \
