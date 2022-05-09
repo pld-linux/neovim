@@ -30,7 +30,7 @@ Source2:	%{name}.svg
 Patch0:		desktop.patch
 BuildRequires:	cmake >= 3.10
 BuildRequires:	gcc >= 6:4.4
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gperf
 BuildRequires:	jemalloc-devel
 BuildRequires:	libstdc++-devel
