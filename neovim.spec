@@ -50,6 +50,7 @@ BuildRequires:	lua51
 BuildRequires:	lua51-devel
 BuildRequires:	lua51-luv-devel >= 1.43.0
 %else
+BuildRequires:	luajit
 BuildRequires:	luajit-devel
 BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
