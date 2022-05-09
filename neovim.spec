@@ -19,7 +19,7 @@
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.7.0
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
@@ -42,6 +42,7 @@ BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	tree-sitter-devel
 BuildRequires:	unibilium-devel >= 2.0.0
@@ -54,12 +55,10 @@ BuildRequires:	luajit
 BuildRequires:	luajit-devel
 BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
-Requires:	desktop-file-utils
-Requires:	gtk-update-icon-cache
-Requires:	hicolor-icon-theme
 Requires:	libtermkey >= 0.18
 Requires:	libuv >= 1.28.0
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
+Suggests:	%{name}-desktop = %{version}-%{release}
 Suggests:	python-neovim
 Suggests:	python3-neovim
 Suggests:	ruby-neovim
@@ -80,6 +79,17 @@ strives to be a superset of Vim, notwithstanding some intentionally
 removed misfeatures; excepting those few and carefully-considered
 excisions, Neovim is Vim. It is built for users who want the good
 parts of Vim, without compromise, and more.
+
+%package desktop
+Summary:	Desktop files for Neovim
+Group:		Applications/Editors/Vim
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	hicolor-icon-theme
+BuildArch:	noarch
+
+%description desktop
+Desktop files for Neovim.
 
 %prep
 %setup -q
@@ -121,8 +131,6 @@ cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/nvim.svg
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%update_desktop_database
-%update_icon_cache hicolor
 %banner -e -o %{name} << 'EOF'
 
 The Neovim executable is called 'nvim'. To use your existing Vim
@@ -141,7 +149,11 @@ If you have any questions, have a look at:
     https://github.com/neovim/neovim/wiki/FAQ.
 EOF
 
-%postun
+%post desktop
+%update_desktop_database
+%update_icon_cache hicolor
+
+%postun desktop
 %update_desktop_database
 %update_icon_cache hicolor
 
@@ -153,6 +165,9 @@ EOF
 %attr(755,root,root) %{_bindir}/nvim
 %{_mandir}/man1/nvim.1*
 %{_datadir}/nvim
+
+%files desktop
+%defattr(644,root,root,755)
 %{_desktopdir}/nvim.desktop
 %{_iconsdir}/hicolor/*/apps/nvim.png
 %{_iconsdir}/hicolor/*/apps/nvim.svg
