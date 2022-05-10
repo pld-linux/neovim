@@ -32,7 +32,6 @@ BuildRequires:	cmake >= 3.10
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
 BuildRequires:	gperf
-BuildRequires:	jemalloc-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtermkey-devel >= 0.18
 BuildRequires:	libuv-devel >= 1.28.0
