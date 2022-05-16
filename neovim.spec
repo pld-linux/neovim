@@ -19,7 +19,7 @@
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.7.0
-Release:	2
+Release:	3
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
@@ -85,6 +85,7 @@ Group:		Applications/Editors/Vim
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
+Requires:	%{name} = %{version}-%{release}
 BuildArch:	noarch
 
 %description desktop
