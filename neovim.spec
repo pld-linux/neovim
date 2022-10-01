@@ -18,24 +18,24 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.7.2
+Version:	0.8.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	f0fb0aa65462e36ca1ef627833266976
+# Source0-md5:	4fccaf03bd8854e902cabf65e85e3346
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
+Patch1:		build-type.patch
 BuildRequires:	cmake >= 3.10
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
-BuildRequires:	gperf
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtermkey-devel >= 0.18
+BuildRequires:	libtermkey-devel >= 0.22
 BuildRequires:	libuv-devel >= 1.28.0
-BuildRequires:	libvterm-devel >= 0.1.0
+BuildRequires:	libvterm-devel >= 0.3
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
@@ -54,8 +54,9 @@ BuildRequires:	luajit
 BuildRequires:	luajit-devel
 BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
-Requires:	libtermkey >= 0.18
+Requires:	libtermkey >= 0.22
 Requires:	libuv >= 1.28.0
+Requires:	libvterm >= 0.3
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
 Suggests:	%{name}-desktop = %{version}-%{release}
 Suggests:	python-neovim
@@ -94,6 +95,7 @@ Desktop files for Neovim.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %cmake -B build \
