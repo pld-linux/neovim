@@ -18,17 +18,18 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.8.0
+Version:	0.8.1
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	4fccaf03bd8854e902cabf65e85e3346
+# Source0-md5:	61c323fdeb948c31d780dd33f2b764f6
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
 Patch1:		build-type.patch
+Patch2:		armv7-memalign.patch
 BuildRequires:	cmake >= 3.10
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
@@ -96,6 +97,7 @@ Desktop files for Neovim.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %cmake -B build \
