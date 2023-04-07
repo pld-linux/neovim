@@ -18,17 +18,18 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.8.3
+Version:	0.9.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	12984fbf6ca9d33cf6a79c7c3134c2ac
+# Source0-md5:	86b762639f29ee92d37f8ec0f78b7074
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
 Patch1:		build-type.patch
+Patch2:		luv.patch
 BuildRequires:	cmake >= 3.10
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
@@ -43,7 +44,7 @@ BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
-BuildRequires:	tree-sitter-devel
+BuildRequires:	tree-sitter-devel >= 0.20.8
 BuildRequires:	unibilium-devel >= 2.0.0
 %if %{with prefer_lua}
 BuildRequires:	lua51
@@ -58,6 +59,7 @@ Requires:	libtermkey >= 0.22
 Requires:	libuv >= 1.28.0
 Requires:	libvterm >= 0.3
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
+Requires:	tree-sitter >= 0.20.8
 Suggests:	%{name}-desktop = %{version}-%{release}
 Suggests:	python-neovim
 Suggests:	python3-neovim
@@ -96,6 +98,7 @@ Desktop files for Neovim.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1 -R
 
 %build
 %cmake -B build \

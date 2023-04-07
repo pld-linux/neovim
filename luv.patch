@@ -1,0 +1,52 @@
+From da0c66bcddbe4e6ebc72357c9f6c5de75e176744 Mon Sep 17 00:00:00 2001
+From: dundargoc <gocdundar@gmail.com>
+Date: Sun, 5 Mar 2023 17:06:13 +0100
+Subject: [PATCH] build: remove workaround for incorrectly packaged libluv
+
+This removes a workaround for incorrectly packaged libluv in
+90e44ecf1144cb32195da00e24d23afb111ea680 as it should not be needed
+anymore.
+---
+ cmake/FindLibluv.cmake  | 11 +----------
+ src/nvim/CMakeLists.txt |  8 ++------
+ 2 files changed, 3 insertions(+), 16 deletions(-)
+
+diff --git a/cmake/FindLibluv.cmake b/cmake/FindLibluv.cmake
+index 9a74d5d0e1ba0..3dfc53602413c 100644
+--- a/cmake/FindLibluv.cmake
++++ b/cmake/FindLibluv.cmake
+@@ -1,14 +1,5 @@
+ find_path(LIBLUV_INCLUDE_DIR luv/luv.h)
+-
+-# Explicitly look for luv.so. #10407
+-list(APPEND LIBLUV_NAMES luv_a luv libluv_a luv${CMAKE_SHARED_LIBRARY_SUFFIX})
+-
+-find_library(LIBLUV_LIBRARY NAMES ${LIBLUV_NAMES})
+-
+-set(LIBLUV_LIBRARIES ${LIBLUV_LIBRARY})
+-set(LIBLUV_INCLUDE_DIRS ${LIBLUV_INCLUDE_DIR})
+-
++find_library(LIBLUV_LIBRARY NAMES luv_a luv libluv_a luv.so)
+ find_package_handle_standard_args(Libluv DEFAULT_MSG
+   LIBLUV_LIBRARY LIBLUV_INCLUDE_DIR)
+-
+ mark_as_advanced(LIBLUV_INCLUDE_DIR LIBLUV_LIBRARY)
+diff --git a/src/nvim/CMakeLists.txt b/src/nvim/CMakeLists.txt
+index 61530f5a7bf95..51e0727cd51c4 100755
+--- a/src/nvim/CMakeLists.txt
++++ b/src/nvim/CMakeLists.txt
+@@ -14,12 +14,8 @@ else()
+ endif()
+ 
+ find_package(Libluv 1.43.0 REQUIRED)
+-target_include_directories(main_lib SYSTEM BEFORE INTERFACE ${LIBLUV_INCLUDE_DIRS})
+-# Use "luv" as imported library, to work around CMake using "-lluv" for
+-# "luv.so".  #10407
+-add_library(luv UNKNOWN IMPORTED)
+-set_target_properties(luv PROPERTIES IMPORTED_LOCATION ${LIBLUV_LIBRARIES})
+-target_link_libraries(main_lib INTERFACE luv)
++target_include_directories(main_lib SYSTEM BEFORE INTERFACE ${LIBLUV_INCLUDE_DIR})
++target_link_libraries(main_lib INTERFACE ${LIBLUV_LIBRARY})
+ 
+ find_package(Iconv REQUIRED)
+ find_package(Libtermkey 0.22 REQUIRED)

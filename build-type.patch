@@ -10,16 +10,3 @@ diff --color -ur neovim-0.8.0.orig/cmake/Util.cmake neovim-0.8.0/cmake/Util.cmak
  
    get_property(isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
    if(isMultiConfig)
-diff --color -ur neovim-0.8.0.orig/CMakeLists.txt neovim-0.8.0/CMakeLists.txt
---- neovim-0.8.0.orig/CMakeLists.txt	2022-09-30 17:15:13.000000000 +0200
-+++ neovim-0.8.0/CMakeLists.txt	2022-10-01 09:56:00.395911537 +0200
-@@ -150,7 +150,8 @@
-   # Minimize logging for release-type builds.
-   if(CMAKE_BUILD_TYPE STREQUAL "Release"
-       OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"
--      OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-+      OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel"
-+      OR CMAKE_BUILD_TYPE STREQUAL "PLD")
-     message(STATUS "MIN_LOG_LEVEL not specified, default is 3 (ERROR) for release builds")
-     set(MIN_LOG_LEVEL 3)
-   else()
