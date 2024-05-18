@@ -18,25 +18,24 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.9.5
+Version:	0.10.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	106932337799a21cf8d28d488c7fc702
+# Source0-md5:	b5ad54391b6a1a30930c1ab392d506ec
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
 Patch1:		build-type.patch
 Patch2:		luv.patch
-BuildRequires:	cmake >= 3.10
+BuildRequires:	cmake >= 3.13
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtermkey-devel >= 0.22
 BuildRequires:	libuv-devel >= 1.28.0
-BuildRequires:	libvterm-devel >= 0.3
+BuildRequires:	libvterm-devel >= 0.3.3
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
@@ -44,7 +43,7 @@ BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
-BuildRequires:	tree-sitter-devel >= 0.20.8
+BuildRequires:	tree-sitter-devel >= 0.20.9
 BuildRequires:	unibilium-devel >= 2.0.0
 %if %{with prefer_lua}
 BuildRequires:	lua51
@@ -55,11 +54,10 @@ BuildRequires:	luajit
 BuildRequires:	luajit-devel
 BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
-Requires:	libtermkey >= 0.22
 Requires:	libuv >= 1.28.0
-Requires:	libvterm >= 0.3
+Requires:	libvterm >= 0.3.3
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
-Requires:	tree-sitter >= 0.20.8
+Requires:	tree-sitter >= 0.20.9
 Suggests:	%{name}-desktop = %{version}-%{release}
 Suggests:	python-neovim
 Suggests:	python3-neovim
@@ -107,8 +105,8 @@ Desktop files for Neovim.
 	-DLUA_INCLUDE_DIR=/usr/include/lua5.1 \
 	-DUSE_BUNDLED=OFF \
 	-DENABLE_JEMALLOC=ON \
-	-DLIBLUV_INCLUDE_DIR=%{luv_includedir} \
-	-DLIBLUV_LIBRARY=%{luv_library}
+	-DLUV_INCLUDE_DIR=%{luv_includedir} \
+	-DLUV_LIBRARY=%{luv_library}
 
 %{__make} -C build
 
@@ -164,7 +162,7 @@ EOF
 
 %files -f nvim.lang
 %defattr(644,root,root,755)
-%doc BACKERS.md CONTRIBUTING.md LICENSE.txt README.md
+%doc CONTRIBUTING.md LICENSE.txt README.md
 %dir /etc/xdg/nvim
 %config(noreplace) %verify(not md5 mtime size) /etc/xdg/nvim/init.vim
 %attr(755,root,root) %{_bindir}/nvim

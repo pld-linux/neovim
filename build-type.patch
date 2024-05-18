@@ -2,22 +2,22 @@ diff --color -ur neovim-0.8.0.orig/cmake/Util.cmake neovim-0.8.0/cmake/Util.cmak
 --- neovim-0.8.0.orig/cmake/Util.cmake	2022-09-30 17:15:13.000000000 +0200
 +++ neovim-0.8.0/cmake/Util.cmake	2022-10-01 09:53:36.320939926 +0200
 @@ -162,7 +162,7 @@
- # Passing CMAKE_BUILD_TYPE for multi-config generators will now not only
- # not be used, but also generate a warning for the user.
- function(set_default_buildtype)
+ # Passing CMAKE_BUILD_TYPE for multi-config generators will not only not be
+ # used, but also generate a warning for the user.
+ function(set_default_buildtype BUILD_TYPE)
 -  set(allowableBuildTypes Debug Release MinSizeRel RelWithDebInfo)
 +  set(allowableBuildTypes Debug Release MinSizeRel RelWithDebInfo PLD)
- 
-   get_property(isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-   if(isMultiConfig)
+   if(NOT BUILD_TYPE IN_LIST allowableBuildTypes)
+     message(FATAL_ERROR "Invalid build type: ${BUILD_TYPE}")
+   endif()
 --- neovim-0.9.1/runtime/lua/nvim/health.lua.orig	2023-05-29 13:24:38.000000000 +0200
 +++ neovim-0.9.1/runtime/lua/nvim/health.lua	2023-07-02 13:20:36.760937259 +0200
 @@ -152,7 +152,7 @@
    local buildtype = vim.fn.matchstr(vim.fn.execute('version'), [[\v\cbuild type:?\s*[^\n\r\t ]+]])
-   if empty(buildtype) then
-     health.report_error('failed to get build type from :version')
+   if buildtype == '' then
+     health.error('failed to get build type from :version')
 -  elseif vim.regex([[\v(MinSizeRel|Release|RelWithDebInfo)]]):match_str(buildtype) then
 +  elseif vim.regex([[\v(MinSizeRel|Release|RelWithDebInfo|PLD)]]):match_str(buildtype) then
-     health.report_ok(buildtype)
+     health.ok(buildtype)
    else
-     health.report_info(buildtype)
+     health.info(buildtype)
