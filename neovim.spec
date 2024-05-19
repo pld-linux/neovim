@@ -9,9 +9,11 @@
 %endif
 
 %if %{with prefer_lua}
+%define		lpeg_library	/usr/%{_lib}/lua/5.1/lpeg.so
 %define		luv_includedir	/usr/include/lua5.1
 %define		luv_library	/usr/%{_lib}/lua/5.1/luv.so
 %else
+%define		lpeg_library	/usr/%{_lib}/luajit/2.1/lpeg.so
 %define		luv_includedir	/usr/include/luajit-2.1
 %define		luv_library	/usr/%{_lib}/luajit/2.1/luv.so
 %endif
@@ -37,7 +39,6 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libuv-devel >= 1.28.0
 BuildRequires:	libvterm-devel >= 0.3.3
 BuildRequires:	lua-bitop >= 1.0.2
-BuildRequires:	lua-lpeg
 BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
@@ -46,12 +47,14 @@ BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	tree-sitter-devel >= 0.20.9
 BuildRequires:	unibilium-devel >= 2.0.0
 %if %{with prefer_lua}
+BuildRequires:	lua-lpeg
 BuildRequires:	lua51
 BuildRequires:	lua51-devel
 BuildRequires:	lua51-luv-devel >= 1.43.0
 %else
 BuildRequires:	luajit
 BuildRequires:	luajit-devel
+BuildRequires:	luajit-lpeg
 BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
 Requires:	libuv >= 1.28.0
@@ -105,6 +108,7 @@ Desktop files for Neovim.
 	-DLUA_INCLUDE_DIR=/usr/include/lua5.1 \
 	-DUSE_BUNDLED=OFF \
 	-DENABLE_JEMALLOC=ON \
+	-DLPEG_LIBRARY=%{lpeg_library} \
 	-DLUV_INCLUDE_DIR=%{luv_includedir} \
 	-DLUV_LIBRARY=%{luv_library}
 
