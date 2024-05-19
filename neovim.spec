@@ -59,6 +59,7 @@ BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
 Requires:	libuv >= 1.28.0
 Requires:	libvterm >= 0.3.3
+Requires:	lua%{!?with_prefer_lua:jit}-lpeg
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
 Requires:	tree-sitter >= 0.20.9
 Suggests:	%{name}-desktop = %{version}-%{release}
