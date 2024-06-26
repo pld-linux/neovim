@@ -21,7 +21,7 @@
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.10.0
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
@@ -120,7 +120,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{/etc/xdg/nvim,%{_iconsdir}/hicolor/scalable/apps}
+install -d $RPM_BUILD_ROOT{/etc/xdg/nvim,%{_iconsdir}/hicolor/scalable/apps,%{_datadir}/nvim/runtime/parser}
 touch $RPM_BUILD_ROOT/etc/xdg/nvim/init.vim
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/nvim.svg
 
