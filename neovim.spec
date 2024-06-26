@@ -122,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{/etc/xdg/nvim,%{_iconsdir}/hicolor/scalable/apps,%{_datadir}/nvim/runtime/parser}
+install -d $RPM_BUILD_ROOT{/etc/xdg/nvim,%{_iconsdir}/hicolor/scalable/apps,%{_libdir}/nvim/parser}
 touch $RPM_BUILD_ROOT/etc/xdg/nvim/init.vim
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/scalable/apps/nvim.svg
 
@@ -175,6 +175,8 @@ EOF
 %attr(755,root,root) %{_bindir}/nvim
 %{_mandir}/man1/nvim.1*
 %{_datadir}/nvim
+%dir %{_libdir}/nvim
+%dir %{_libdir}/nvim/parser
 
 %files desktop
 %defattr(644,root,root,755)
