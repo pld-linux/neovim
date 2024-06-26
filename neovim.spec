@@ -32,6 +32,7 @@ Source2:	%{name}.svg
 Patch0:		desktop.patch
 Patch1:		build-type.patch
 Patch2:		luv.patch
+Patch3:		ts-parsers.patch
 BuildRequires:	cmake >= 3.13
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
@@ -101,6 +102,7 @@ Desktop files for Neovim.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1 -R
+%patch3 -p1
 
 %build
 %cmake -B build \
