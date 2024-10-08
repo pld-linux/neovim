@@ -21,7 +21,7 @@
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.10.2
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
@@ -63,6 +63,12 @@ Requires:	lua%{!?with_prefer_lua:jit}-lpeg
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
 Requires:	tree-sitter >= 0.20.9
 Suggests:	%{name}-desktop = %{version}-%{release}
+Suggests:	neovim-parser-c
+Suggests:	neovim-parser-lua
+Suggests:	neovim-parser-markdown
+Suggests:	neovim-parser-query
+Suggests:	neovim-parser-vim
+Suggests:	neovim-parser-vimdoc
 Suggests:	python-neovim
 Suggests:	python3-neovim
 Suggests:	ruby-neovim
