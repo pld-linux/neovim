@@ -1,0 +1,11 @@
+--- neovim-0.10.3/cmake/FindLuajit.cmake~	2024-12-21 18:15:18.000000000 +0100
++++ neovim-0.10.3/cmake/FindLuajit.cmake	2024-12-26 11:58:10.086665426 +0100
+@@ -6,7 +6,7 @@
+ elseif(MINGW)
+   list(APPEND LUAJIT_NAMES libluajit libluajit-5.1)
+ else()
+-  list(APPEND LUAJIT_NAMES luajit-5.1)
++  list(APPEND LUAJIT_NAMES luajit-5.1 luajit-5.2)
+ endif()
+ 
+ find_library2(LUAJIT_LIBRARY NAMES ${LUAJIT_NAMES})

@@ -21,7 +21,7 @@
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
 Version:	0.10.3
-Release:	2
+Release:	3
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
@@ -32,6 +32,7 @@ Source2:	%{name}.svg
 Patch0:		desktop.patch
 Patch1:		build-type.patch
 Patch2:		luv.patch
+Patch3:		luajit-lua52.patch
 BuildRequires:	cmake >= 3.13
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
@@ -59,8 +60,8 @@ BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
 Requires:	libuv >= 1.28.0
 Requires:	libvterm >= 0.3.3
-Requires:	lua%{!?with_prefer_lua:jit}-lpeg
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
+Requires:	lua%{!?with_prefer_lua:jit}-lpeg
 Requires:	tree-sitter >= 0.20.9
 Suggests:	%{name}-desktop = %{version}-%{release}
 Suggests:	neovim-parser-c
@@ -104,9 +105,10 @@ Desktop files for Neovim.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1 -R
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1 -R
+%patch -P 3 -p1
 
 %build
 %cmake -B build \
