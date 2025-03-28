@@ -1,17 +1,5 @@
-diff --color -ur neovim-0.8.0.orig/cmake/Util.cmake neovim-0.8.0/cmake/Util.cmake
---- neovim-0.8.0.orig/cmake/Util.cmake	2022-09-30 17:15:13.000000000 +0200
-+++ neovim-0.8.0/cmake/Util.cmake	2022-10-01 09:53:36.320939926 +0200
-@@ -162,7 +162,7 @@
- # Passing CMAKE_BUILD_TYPE for multi-config generators will not only not be
- # used, but also generate a warning for the user.
- function(set_default_buildtype BUILD_TYPE)
--  set(allowableBuildTypes Debug Release MinSizeRel RelWithDebInfo)
-+  set(allowableBuildTypes Debug Release MinSizeRel RelWithDebInfo PLD)
-   if(NOT BUILD_TYPE IN_LIST allowableBuildTypes)
-     message(FATAL_ERROR "Invalid build type: ${BUILD_TYPE}")
-   endif()
---- neovim-0.9.1/runtime/lua/nvim/health.lua.orig	2023-05-29 13:24:38.000000000 +0200
-+++ neovim-0.9.1/runtime/lua/nvim/health.lua	2023-07-02 13:20:36.760937259 +0200
+--- neovim-0.9.1/runtime/lua/vim/health/health.lua.orig	2023-05-29 13:24:38.000000000 +0200
++++ neovim-0.9.1/runtime/lua/vim/health/health.lua	2023-07-02 13:20:36.760937259 +0200
 @@ -152,7 +152,7 @@
    local buildtype = vim.fn.matchstr(vim.fn.execute('version'), [[\v\cbuild type:?\s*[^\n\r\t ]+]])
    if buildtype == '' then

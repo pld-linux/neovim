@@ -20,33 +20,32 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.10.4
+Version:	0.11.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	3962ca7ccf181baef5bda161810ce31b
+# Source0-md5:	509e7d1f7b3f77324e10699c298c8e19
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
 Patch1:		build-type.patch
 Patch2:		luv.patch
 Patch3:		luajit-lua52.patch
-BuildRequires:	cmake >= 3.13
+BuildRequires:	cmake >= 3.16
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
 BuildRequires:	libstdc++-devel
 BuildRequires:	libuv-devel >= 1.28.0
-BuildRequires:	libvterm-devel >= 0.3.3
 BuildRequires:	lua-bitop >= 1.0.2
 BuildRequires:	lua-mpack >= 1.0.2
-BuildRequires:	msgpack-devel >= 1.1.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
-BuildRequires:	tree-sitter-devel >= 0.20.9
+BuildRequires:	tree-sitter-devel >= 0.25.0
 BuildRequires:	unibilium-devel >= 2.0.0
+BuildRequires:	utf8proc-devel
 %if %{with prefer_lua}
 BuildRequires:	lua-lpeg
 BuildRequires:	lua51
@@ -59,10 +58,9 @@ BuildRequires:	luajit-lpeg
 BuildRequires:	luajit-luv-devel >= 1.43.0
 %endif
 Requires:	libuv >= 1.28.0
-Requires:	libvterm >= 0.3.3
 Requires:	%{?with_prefer_lua:lua51}%{!?with_prefer_lua:luajit}-luv
 Requires:	lua%{!?with_prefer_lua:jit}-lpeg
-Requires:	tree-sitter >= 0.20.9
+Requires:	tree-sitter >= 0.25.0
 Suggests:	%{name}-desktop = %{version}-%{release}
 Suggests:	neovim-parser-c
 Suggests:	neovim-parser-lua
@@ -119,7 +117,8 @@ Desktop files for Neovim.
 	-DENABLE_JEMALLOC=ON \
 	-DLPEG_LIBRARY=%{lpeg_library} \
 	-DLUV_INCLUDE_DIR=%{luv_includedir} \
-	-DLUV_LIBRARY=%{luv_library}
+	-DLUV_LIBRARY=%{luv_library} \
+	-DENABLE_TRANSLATIONS:BOOL=ON
 
 %{__make} -C build
 
