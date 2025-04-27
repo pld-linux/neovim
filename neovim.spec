@@ -20,13 +20,13 @@
 
 Summary:	Vim-fork focused on extensibility and agility
 Name:		neovim
-Version:	0.11.0
-Release:	1
+Version:	0.11.1
+Release:	1.1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	509e7d1f7b3f77324e10699c298c8e19
+# Source0-md5:	8ae5dc6bf3eb4972542ff3d4d2efc560
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
@@ -43,7 +43,7 @@ BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
-BuildRequires:	tree-sitter-devel >= 0.25.0
+BuildRequires:	tree-sitter-devel >= 0.24.0
 BuildRequires:	unibilium-devel >= 2.0.0
 BuildRequires:	utf8proc-devel
 %if %{with prefer_lua}
