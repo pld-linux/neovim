@@ -19,6 +19,7 @@
 %endif
 
 Summary:	Vim-fork focused on extensibility and agility
+Summary(pl.UTF-8):	Odgałęzienie Vima skupiające się na rozszerzalności i zwinności
 Name:		neovim
 Version:	0.11.6
 Release:	1
@@ -91,8 +92,19 @@ removed misfeatures; excepting those few and carefully-considered
 excisions, Neovim is Vim. It is built for users who want the good
 parts of Vim, without compromise, and more.
 
+%description -l pl.UTF-8
+Neovim to refaktoryzacja - i czasem edycja - w tradycji Vima, który
+wywodzi się od Stevie. Nie jest napisany od początku, ale jest
+kontynuacją i rozszerzeniem Vima. Istnieje wiele klonów, emulatorów
+i imitacji Vima; niektóre są bardziej inteligentne, ale żaden nie jest
+Vimem. Neovim stara się być nadzbiorem Vima, mimo niektórych celowo
+usuniętych dysfunkcji; z wyjątkiem tych kilku ostrożnie wybranych
+cięć, Neovim jest Vimem. Jest tworzony dla użytkowników, którzy chcą
+dobrzych części Vima, bez kompromisów, i coś więcej.
+
 %package desktop
 Summary:	Desktop files for Neovim
+Summary(pl.UTF-8):	Pliki desktop dla Neovima
 Group:		Applications/Editors/Vim
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
@@ -102,6 +114,9 @@ BuildArch:	noarch
 
 %description desktop
 Desktop files for Neovim.
+
+%description desktop -l pl.UTF-8
+Pliki desktop dla Neovima.
 
 %prep
 %setup -q
