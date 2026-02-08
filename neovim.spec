@@ -33,6 +33,8 @@ Patch0:		desktop.patch
 Patch1:		build-type.patch
 Patch2:		luv.patch
 Patch3:		luajit-lua52.patch
+# https://github.com/neovim/neovim/pull/33141.patch (already on master)
+Patch4:		neovim-tree-sitter.patch
 BuildRequires:	cmake >= 3.16
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
@@ -103,10 +105,11 @@ Desktop files for Neovim.
 
 %prep
 %setup -q
-%patch -P 0 -p1
-%patch -P 1 -p1
-%patch -P 2 -p1 -R
-%patch -P 3 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1 -R
+%patch -P3 -p1
+%patch -P4 -p1
 
 %build
 %cmake -B build \
