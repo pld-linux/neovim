@@ -21,13 +21,13 @@
 Summary:	Vim-fork focused on extensibility and agility
 Summary(pl.UTF-8):	Odgałęzienie Vima skupiające się na rozszerzalności i zwinności
 Name:		neovim
-Version:	0.11.6
+Version:	0.11.7
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	eed80441dc30027eb2d55abef73248c4
+# Source0-md5:	6b08e37bd44c49284870dd06e9ff4cf8
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
