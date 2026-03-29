@@ -21,21 +21,19 @@
 Summary:	Vim-fork focused on extensibility and agility
 Summary(pl.UTF-8):	Odgałęzienie Vima skupiające się na rozszerzalności i zwinności
 Name:		neovim
-Version:	0.11.7
+Version:	0.12.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications/Editors/Vim
 # Source0Download: https://github.com/neovim/neovim/releases
 Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	6b08e37bd44c49284870dd06e9ff4cf8
+# Source0-md5:	38af91274a8e671781ddcf8020e953ae
 URL:		https://neovim.io/
 Source2:	%{name}.svg
 Patch0:		desktop.patch
 Patch1:		build-type.patch
 Patch2:		luv.patch
 Patch3:		luajit-lua52.patch
-# https://github.com/neovim/neovim/pull/33141.patch (already on master)
-Patch4:		neovim-tree-sitter.patch
 BuildRequires:	cmake >= 3.16
 BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
@@ -124,7 +122,6 @@ Pliki desktop dla Neovima.
 %patch -P1 -p1
 %patch -P2 -p1 -R
 %patch -P3 -p1
-%patch -P4 -p1
 
 %build
 %cmake -B build \
