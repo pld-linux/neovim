@@ -39,8 +39,6 @@ BuildRequires:	gcc >= 6:4.4
 BuildRequires:	gettext-tools
 BuildRequires:	libstdc++-devel
 BuildRequires:	libuv-devel >= 1.28.0
-BuildRequires:	lua-bitop >= 1.0.2
-BuildRequires:	lua-mpack >= 1.0.2
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
